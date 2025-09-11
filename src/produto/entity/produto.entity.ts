@@ -1,4 +1,10 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class ProdutoEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -21,4 +27,12 @@ export class ProdutoEntity {
 
   @Column({ name: 'categoria', length: '100', nullable: false })
   categoria: string;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at;
+
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deleted_at;
 }
