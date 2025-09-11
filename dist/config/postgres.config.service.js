@@ -22,10 +22,10 @@ let PostgresConfigService = class PostgresConfigService {
             type: 'postgres',
             host: this.configService.get('DB_HOST'),
             port: this.configService.get('DB_PORT'),
-            username: this.configService.get('DB_USER'),
+            username: this.configService.get('DB_USERNAME'),
             password: this.configService.get('DB_PASSWORD'),
             database: this.configService.get('DB_NAME'),
-            entities: [],
+            entities: [__dirname + '/**.entity{.js,.ts}'],
             synchronize: true,
         };
     }
