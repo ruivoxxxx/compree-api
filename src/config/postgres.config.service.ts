@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { Pool } from 'pg';
+import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 @Injectable()
 export class PostgresConfigService implements TypeOrmOptionsFactory {
     constructor(private readonly configService: ConfigService) {}
@@ -15,7 +16,7 @@ export class PostgresConfigService implements TypeOrmOptionsFactory {
             username: this.configService.get<string>('DB_USERNAME'),
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_NAME'),
-            entities: [__dirname + '/../**/entities/*.entity{.ts,.js}'],
+            entities: [ProdutoEntity],
             synchronize: false,
         };
     }
@@ -27,3 +28,4 @@ export const pool = new Pool({
     password: 'DB_PASSWORD',
     port: 5432,
 });
+
