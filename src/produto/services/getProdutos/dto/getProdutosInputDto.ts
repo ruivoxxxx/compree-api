@@ -1,9 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class GetProdutosInputDto {
-    @ApiProperty()
-    page: number;
-
-    @ApiProperty()
-    size: number;
+    constructor(
+        readonly id: string,
+        readonly nome: string,
+    ) {}
 }

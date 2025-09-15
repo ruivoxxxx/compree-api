@@ -1,7 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
-import { PostProdutosRepository } from '../repository/postProdutos.repositor';
-import { PostProdutosInputDto } from '../dto/postProdutosInputDto';
 import { Repository } from 'typeorm';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 @Injectable()
@@ -10,9 +8,9 @@ export class PostProdutosService {
         @InjectRepository(ProdutoEntity)
         private readonly postProdutoRepository: Repository<ProdutoEntity>,
     ) {}
-    async execute(data: PostProdutosInputDto) {
+    async execute(data: ProdutoEntity) {
         try {
-            return await this.postProdutoRepository.create();
+            return await this.postProdutoRepository.save(data);
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }

@@ -13,7 +13,12 @@ export class GetProdutosService {
 
     async execute() {
         try {
-            // return await this.getProdutosRepository.find(data);
+            const produtos = await this.getProdutosRepository.find();
+
+            const produtoLista = produtos.map(
+                (produto) => new GetProdutosInputDto(produto.id, produto.nome),
+            );
+            return produtoLista;
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }

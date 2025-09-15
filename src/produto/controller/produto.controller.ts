@@ -26,12 +26,8 @@ export class ProdutoController {
     @ApiOkResponse({
         description: 'Produtos Listados com sucesso!',
     })
-    async listProduto(/*@Query() data: GetProdutosInputDto*/) {
-        const result = await this.getProdutos.execute();
-        ///
-        console.log(result);
-        ///
-        return result;
+    async listProduto() {
+        return await this.getProdutos.execute();
     }
 
     @Post()
@@ -39,6 +35,8 @@ export class ProdutoController {
     @ApiOkResponse({ description: 'Produto criado com sucesso!' })
     async createProduto(@Body() data: PostProdutosInputDto) {
         return await this.postProdutosService.execute(data);
+
+        // analisar uma melhor abordagem para a criação do produto
     }
 
     @Put('/:id')
