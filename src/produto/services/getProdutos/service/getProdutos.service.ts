@@ -11,7 +11,7 @@ export class GetProdutosService {
         private readonly getProdutosRepository: Repository<ProdutoEntity>,
     ) {}
 
-    async execute(data: GetProdutosInputDto) {
+    async execute() {
         try {
             // return await this.getProdutosRepository.find(data);
         } catch (error) {
