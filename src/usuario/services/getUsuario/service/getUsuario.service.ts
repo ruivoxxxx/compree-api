@@ -3,7 +3,8 @@ import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
 import { Repository } from 'typeorm';
 
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { GetUsuariosInputDto } from '../dto/GetUsuariosInputDto';
+import { GetUsuariosInputDto } from '../dto/getUsuariosInputDto';
+
 @Injectable()
 export class GetUsuarioService {
     constructor(
@@ -25,4 +26,3 @@ export class GetUsuarioService {
         }
     }
 }
-

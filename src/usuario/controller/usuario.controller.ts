@@ -7,7 +7,7 @@ import {
     Post,
     Put,
 } from '@nestjs/common';
-import { PostProdutoService } from '../services/postUsuario/service/postUsuario.service';
+
 import { UsuarioEntity } from '../entity/usuario.entity';
 import {
     ApiInternalServerErrorResponse,
@@ -16,10 +16,11 @@ import {
 } from '@nestjs/swagger';
 import { randomUUID } from 'crypto';
 import { GetUsuarioService } from '../services/getUsuario/service/getUsuario.service';
+import { PostUsuarioService } from '../services/postUsuario/service/postUsuario.service';
 @Controller('usuario')
 export class UsuarioController {
     constructor(
-        private readonly postUsuarioService: PostProdutoService,
+        private readonly postUsuarioService: PostUsuarioService,
         private readonly getUsuarioService: GetUsuarioService,
     ) {}
 
@@ -58,4 +59,3 @@ export class UsuarioController {
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async deleteUsuario(@Param('id') id: string) {}
 }
-

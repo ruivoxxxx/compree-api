@@ -16,7 +16,14 @@ export class GetProdutosService {
             const produtos = await this.getProdutosRepository.find();
 
             const produtoLista = produtos.map(
-                (produto) => new GetProdutosInputDto(produto.id, produto.nome),
+                (produto) =>
+                    new GetProdutosInputDto(
+                        produto.id,
+                        produto.nome,
+                        produto.valor,
+                        produto.descricao,
+                        produto.quantidade,
+                    ),
             );
             return produtoLista;
         } catch (error) {

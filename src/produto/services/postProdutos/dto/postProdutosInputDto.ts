@@ -8,6 +8,7 @@ import {
     IsUUID,
     Min,
 } from 'class-validator';
+import { Entity } from 'typeorm';
 export class CaracteristicaProdutoDTO {
     @IsString()
     @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
@@ -31,7 +32,9 @@ export class PostProdutosInputDto {
     id: string;
 
     @ApiProperty()
-    usuarioId: string;
+    @IsNotEmpty({ message: 'Id de Usuário não pode ser vazio' })
+    @IsNumber()
+    id_usuario: string;
 
     @ApiProperty()
     @IsNotEmpty({ message: 'Nome do Produto não pode ser vazio' })
