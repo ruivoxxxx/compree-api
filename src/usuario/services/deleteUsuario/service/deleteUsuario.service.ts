@@ -7,14 +7,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PutProdutoInputDto } from 'src/produto/services/putProduto/dto/putProdutoInputDto';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
 import { Repository } from 'typeorm';
-import { PutUsuarioInputDto } from '../dto/putUsuarioInputDto';
+
 @Injectable()
-export class PutUsuarioService {
+export class DeleteUsuarioService {
     constructor(
         @InjectRepository(UsuarioEntity)
         private readonly putUsuarioRepository: Repository<UsuarioEntity>,
     ) {}
-    async execute(id: string, data: PutUsuarioInputDto) {
+    async execute(id: string) {
         try {
             const verify_users = await this.putUsuarioRepository.findOneBy({
                 id,
@@ -22,9 +22,8 @@ export class PutUsuarioService {
             if (!verify_users) {
                 throw new NotFoundException('Usuário Não Encontrado');
             }
-            Object.assign(verify_users, data);
 
-            await this.putUsuarioRepository.save(verify_users);
+            await this.putUsuarioRepository.remove(verify_users);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);

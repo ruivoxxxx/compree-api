@@ -4,6 +4,7 @@ import { PostgresConfigService } from './config/postgres.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { ProdutoController } from './produto/controller/produto.controller';
 import { ProdutoModule } from './produto/produto.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { ProdutoModule } from './produto/produto.module';
             inject: [PostgresConfigService],
         }),
         ProdutoModule,
+        UsuarioModule,
     ],
     controllers: [],
     providers: [],

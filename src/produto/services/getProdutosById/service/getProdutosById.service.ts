@@ -14,16 +14,16 @@ export class GetProdutosByIdService {
         private readonly getProdutosRepository: Repository<ProdutoEntity>,
     ) {}
 
-    async execute(data: ProdutoEntity) {
+    async execute(id: string) {
         try {
-            const produtos = await this.getProdutosRepository.findOneBy(data);
+            const produtos = await this.getProdutosRepository.findOneBy({ id });
             if (!produtos) {
                 throw new NotFoundException('Produto Não Encontrado');
             }
+            return produtos;
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
         }
     }
 }
-

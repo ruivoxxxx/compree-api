@@ -17,18 +17,25 @@ import {
 import { randomUUID } from 'crypto';
 import { GetUsuarioService } from '../services/getUsuario/service/getUsuario.service';
 import { PostUsuarioService } from '../services/postUsuario/service/postUsuario.service';
+import { PostUsuarioInputDto } from '../services/postUsuario/dto/postUsuarioInputDto';
+import { PutProdutoInputDto } from 'src/produto/services/putProduto/dto/putProdutoInputDto';
+import { PutUsuarioInputDto } from '../services/putUsuario/dto/putUsuarioInputDto';
+import { PutUsuarioService } from '../services/putUsuario/service/putUsuario.service';
+import { DeleteUsuarioService } from '../services/deleteUsuario/service/deleteUsuario.service';
 @Controller('usuario')
 export class UsuarioController {
     constructor(
         private readonly postUsuarioService: PostUsuarioService,
         private readonly getUsuarioService: GetUsuarioService,
+        private readonly putUsuarioService: PutUsuarioService,
+        private readonly deleteUsuarioService: DeleteUsuarioService,
     ) {}
 
     @Post('')
     @ApiOperation({ summary: 'Criação de usuário' })
     @ApiOkResponse({ description: 'Usuário criado com sucesso' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
-    async createUsuario(@Body() data: UsuarioEntity) {
+    async createUsuario(@Body() data: PostUsuarioInputDto) {
         const usuario = new UsuarioEntity();
 
         usuario.id = randomUUID();
@@ -51,11 +58,18 @@ export class UsuarioController {
     @ApiOperation({ summary: 'Atualiza informações de Usuário' })
     @ApiOkResponse({ description: 'Usuário Atualizado Com Sucesso!' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
-    async putUsuario(@Param('id') id: string /*@Body() data:*/) {}
+    async putUsuario(
+        @Param('id') id: string,
+        @Body() data: PutUsuarioInputDto,
+    ) {
+        await this.putUsuarioService.execute(id, data);
+    }
 
-    @Delete('id')
+    @Delete('/:id')
     @ApiOperation({ summary: 'Deleta informações de Usuário' })
     @ApiOkResponse({ description: 'Usuário Deletado Com Sucesso!' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
-    async deleteUsuario(@Param('id') id: string) {}
+    async deleteUsuario(@Param('id') id: string) {
+        await this.deleteUsuarioService.execute(id);
+    }
 }

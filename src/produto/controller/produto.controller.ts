@@ -17,6 +17,7 @@ import { ProdutoEntity } from '../entity/produto.entity';
 import { randomUUID } from 'crypto';
 import { PutProdutoInputDto } from '../services/putProduto/dto/putProdutoInputDto';
 import { PutProdutoService } from '../services/putProduto/service/putProduto.service';
+import { GetProdutosByIdService } from '../services/getProdutosById/service/getProdutosById.service';
 
 @Controller('produto')
 export class ProdutoController {
@@ -24,6 +25,7 @@ export class ProdutoController {
         private readonly getProdutos: GetProdutosService,
         private readonly postProdutosService: PostProdutosService,
         private readonly putProdutosService: PutProdutoService,
+        private readonly getProdutosByIdService: GetProdutosByIdService,
     ) {}
 
     @Get()
@@ -33,6 +35,14 @@ export class ProdutoController {
     })
     async listProduto() {
         return await this.getProdutos.execute();
+    }
+    @Get('/:id')
+    @ApiOperation({ summary: 'Lista Produtos' })
+    @ApiOkResponse({
+        description: 'Produtos Listados com sucesso!',
+    })
+    async listByIdProduto(@Param('id') id: string) {
+        return await this.getProdutosByIdService.execute(id);
     }
 
     @Post()

@@ -16,18 +16,17 @@ export class PutProdutoService {
 
     async execute(id: string, data: PutProdutoInputDto) {
         try {
-            const verifyProduto = await this.putProdutoRepository.findOneBy({
+            const verify_produto = await this.putProdutoRepository.findOneBy({
                 id,
             });
-            if (!verifyProduto) {
+            if (!verify_produto) {
                 throw new NotFoundException('Produto não Encontrado');
             }
-            Object.assign(verifyProduto, data);
-            await this.putProdutoRepository.save(verifyProduto);
+            Object.assign(verify_produto, data);
+            await this.putProdutoRepository.save(verify_produto);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
         }
     }
 }
-
