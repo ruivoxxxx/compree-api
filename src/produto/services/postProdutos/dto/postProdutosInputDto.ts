@@ -8,8 +8,14 @@ import {
     IsUUID,
     Min,
 } from 'class-validator';
-import { Entity } from 'typeorm';
+import { ProdutoImagemEntity } from 'src/produto/entity/produto-imagem.entity';
+import { ProdutoEntity } from 'src/produto/entity/produto.entity';
+
 export class CaracteristicaProdutoDTO {
+    @ApiProperty()
+    @IsString()
+    id: string;
+
     @IsString()
     @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
     nome: string;
@@ -17,15 +23,24 @@ export class CaracteristicaProdutoDTO {
     @IsString()
     @IsNotEmpty({ message: 'Descrição da característica não pode ser vazio' })
     descricao: string;
+
+    @ApiProperty()
+    produto: ProdutoEntity;
 }
 
 export class ImagemProdutoDTO {
+    @ApiProperty()
+    id: string;
+
     @IsUrl()
     url: string;
 
     @IsString()
     @IsNotEmpty({ message: 'Descrição da imagem não pode ser vazia' })
     descricao: string;
+
+    @ApiProperty()
+    produto: ProdutoEntity;
 }
 export class PostProdutosInputDto {
     @IsUUID()
@@ -62,4 +77,10 @@ export class PostProdutosInputDto {
     @IsString()
     @IsNotEmpty({ message: 'Categoria do Produto não pode ser vazio' })
     categoria: string;
+
+    @ApiProperty()
+    caracteristica: CaracteristicaProdutoDTO[];
+
+    @ApiProperty()
+    imagem: ImagemProdutoDTO[];
 }

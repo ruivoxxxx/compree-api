@@ -57,7 +57,11 @@ export class ProdutoController {
         produto.quantidade = data.quantidade;
         produto.descricao = data.descricao;
         produto.categoria = data.categoria;
-
+        produto.caracteristica = data.caracteristica;
+        produto.imagem = data.imagem;
+        //analisar se é necessario fazer a instancia de entidade para atribuir valores do meu input dto
+        //acho que é necessario por conta que nao tenho binds ao passar os valores para o banco, por isso preciso atribuir esse valores no controller
+        //analisar se posso fazer essa atribuição em outro arquivo, service ou de preferencia maior, repository
         await this.postProdutosService.execute(data);
 
         // analisar uma melhor abordagem para a criação do produto

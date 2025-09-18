@@ -2,8 +2,11 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ProdutoCaracteristicaEntity } from './produto-caracteristica.entity';
+import { ProdutoImagemEntity } from './produto-imagem.entity';
 @Entity({ name: 'produtos' })
 export class ProdutoEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -27,6 +30,20 @@ export class ProdutoEntity {
     @Column({ name: 'categoria', length: '100', nullable: false })
     categoria: string;
 
+    @OneToMany(
+        () => ProdutoCaracteristicaEntity,
+        (produtoCaracteristicaEntity) => produtoCaracteristicaEntity.produto,
+        { cascade: true, eager: true },
+    )
+    caracteristica: ProdutoCaracteristicaEntity[];
+
+    @OneToMany(
+        () => ProdutoImagemEntity,
+        (produtoImagemEntity) => produtoImagemEntity.produto,
+        { cascade: true, eager: true },
+    )
+    imagem: ProdutoImagemEntity[];
+
     // @CreateDateColumn({ name: 'created_at' })
     // created_at;
 
@@ -36,4 +53,3 @@ export class ProdutoEntity {
     // @CreateDateColumn({ name: 'deleted_at' })
     // deleted_at;
 }
-

@@ -4,16 +4,18 @@ import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 import { Repository } from 'typeorm';
 // import { GetProdutosOutPutDto } from '../dto/getProdutosOutPut.dto';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { GetProdutosRepository } from '../repository/getProdutos.repository';
 @Injectable()
 export class GetProdutosService {
     constructor(
-        @InjectRepository(ProdutoEntity)
-        private readonly getProdutosRepository: Repository<ProdutoEntity>,
+        // @InjectRepository(ProdutoEntity)
+        // private readonly getProdutosRepository: Repository<ProdutoEntity>,
+        private readonly getProdutosRepository: GetProdutosRepository,
     ) {}
 
     async execute() {
         try {
-            const produtos = await this.getProdutosRepository.find();
+            const produtos = await this.getProdutosRepository.getProdutos();
 
             const produtoLista = produtos.map(
                 (produto) =>
