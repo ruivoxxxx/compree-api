@@ -6,8 +6,7 @@ import { PostUsuarioInputDto } from '../dto/postUsuarioInputDto';
 @Injectable()
 export class PostUsuarioService {
     constructor(
-        @InjectRepository(UsuarioEntity)
-        private readonly postUsuarioRepository: Repository<UsuarioEntity>,
+        private readonly postUsuarioRepository: PostUsuarioRepository,
     ) {}
 
     async execute(data: PostUsuarioInputDto) {
