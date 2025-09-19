@@ -1,14 +1,15 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PostUsuarioInputDto } from '../dto/postUsuarioInputDto';
-import { Repository } from 'typeorm';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-
-export class PostUsuarioRepository {
+import { Repository } from 'typeorm';
+@Injectable()
+export class GetUsuarioByIdRepository {
     constructor(
         @InjectRepository(UsuarioEntity)
         private readonly dataBase: Repository<UsuarioEntity>,
     ) {}
-    async createUsuario(data: PostUsuarioInputDto) {
-        await this.dataBase.save(data);
+    async getUsuarioById(id: string) {
+        return await this.dataBase.findOneBy({ id });
     }
 }
+

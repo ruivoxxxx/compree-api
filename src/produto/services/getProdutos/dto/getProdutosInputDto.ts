@@ -7,5 +7,5 @@ export class GetProdutosInputDto {
         readonly descricao: string,
         readonly quantidade: number,
         readonly categoria: string,
-    ) {}
+    ) {} //ver se consigo fazer tudo apenas fazendo input tradicional
 }

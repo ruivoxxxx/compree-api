@@ -36,15 +36,16 @@ export class GetProdutosByIdService {
             if (!produto) {
                 throw new NotFoundException('Produto Não Encontrado');
             }
-            return {
-                id: produto.id,
-                id_usuario: produto.id_usuario,
-                nome: produto.nome,
-                valor: produto.valor,
-                descricao: produto.descricao,
-                quantidade: produto.quantidade,
-                categoria: produto.categoria,
-            };
+            return produto;
+
+            //verificar se dessa forma que fiz com o output vai resolver o meu problema
+            // {
+            //     id: produto.id,
+            //     nome: produto.nome,
+            //     valor: produto.valor,
+            //     descricao: produto.descricao,
+            //     categoria: produto.categoria,
+            // };
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);

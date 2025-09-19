@@ -1,8 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { Repository } from 'typeorm';
 import { PostUsuarioInputDto } from '../dto/postUsuarioInputDto';
+import { PostUsuarioRepository } from '../repository/postUsuarioRepository';
 @Injectable()
 export class PostUsuarioService {
     constructor(
@@ -11,7 +9,7 @@ export class PostUsuarioService {
 
     async execute(data: PostUsuarioInputDto) {
         try {
-            return await this.postUsuarioRepository.save(data);
+            return await this.postUsuarioRepository.createUsuario(data);
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }
