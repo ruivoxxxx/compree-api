@@ -7,20 +7,44 @@ import {
     InternalServerErrorException,
     NotFoundException,
 } from '@nestjs/common';
+import { GetProdutosInputDto } from '../../getProdutos/dto/getProdutosInputDto';
+import { GetProdutosOutPutDto } from '../../getProdutos/dto/getProdutosOutPut.dto';
+import { GetProdutoByIdOutPutDto } from '../dto/getProdutoByIdOutputDto';
+import { GetProdutosByIdRepository } from '../repository/getProdutosById.repository';
 @Injectable()
 export class GetProdutosByIdService {
     constructor(
-        @InjectRepository(ProdutoEntity)
-        private readonly getProdutosRepository: Repository<ProdutoEntity>,
+        private readonly getProdutoByIdRepository: GetProdutosByIdRepository,
     ) {}
 
-    async execute(id: string) {
+    async execute(id: string): Promise<GetProdutoByIdOutPutDto> {
         try {
-            const produtos = await this.getProdutosRepository.findOneBy({ id });
-            if (!produtos) {
+            const produto =
+                await this.getProdutoByIdRepository.getProdutoById(id);
+
+            // const produtoLista = (produto) =>
+            //     new GetProdutoByIdOutPutDto(
+            //         produto.id,
+            //         produto.id_usuario,
+            //         produto.nome,
+            //         produto.valor,
+            //         produto.descricao,
+            //         produto.quantidade,
+            //         produto.categoria,
+            //     );
+
+            if (!produto) {
                 throw new NotFoundException('Produto Não Encontrado');
             }
-            return produtos;
+            return {
+                id: produto.id,
+                id_usuario: produto.id_usuario,
+                nome: produto.nome,
+                valor: produto.valor,
+                descricao: produto.descricao,
+                quantidade: produto.quantidade,
+                categoria: produto.categoria,
+            };
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);

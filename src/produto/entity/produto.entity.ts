@@ -30,19 +30,19 @@ export class ProdutoEntity {
     @Column({ name: 'categoria', length: '100', nullable: false })
     categoria: string;
 
-    @OneToMany(
-        () => ProdutoCaracteristicaEntity,
-        (produtoCaracteristicaEntity) => produtoCaracteristicaEntity.produto,
-        { cascade: true, eager: true },
-    )
-    caracteristica: ProdutoCaracteristicaEntity[];
+    // @OneToMany(
+    //     () => ProdutoCaracteristicaEntity,
+    //     (produtoCaracteristicaEntity) => produtoCaracteristicaEntity.produto,
+    //     { cascade: true, eager: true },
+    // )
+    // caracteristica: ProdutoCaracteristicaEntity[];
 
-    @OneToMany(
-        () => ProdutoImagemEntity,
-        (produtoImagemEntity) => produtoImagemEntity.produto,
-        { cascade: true, eager: true },
-    )
-    imagem: ProdutoImagemEntity[];
+    // @OneToMany(
+    //     () => ProdutoImagemEntity,
+    //     (produtoImagemEntity) => produtoImagemEntity.produto,
+    //     { cascade: true, eager: true },
+    // )
+    // imagem: ProdutoImagemEntity[];
 
     // @CreateDateColumn({ name: 'created_at' })
     // created_at;

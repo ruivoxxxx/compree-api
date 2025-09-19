@@ -10,7 +10,11 @@ import {
 } from '@nestjs/common';
 import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
 import { GetProdutosInputDto } from '../services/getProdutos/dto/getProdutosInputDto';
-import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import {
+    ApiInternalServerErrorResponse,
+    ApiOkResponse,
+    ApiOperation,
+} from '@nestjs/swagger';
 import { PostProdutosInputDto } from '../services/postProdutos/dto/postProdutosInputDto';
 import { PostProdutosService } from '../services/postProdutos/service/postProdutos.service';
 import { ProdutoEntity } from '../entity/produto.entity';
@@ -18,6 +22,7 @@ import { randomUUID } from 'crypto';
 import { PutProdutoInputDto } from '../services/putProduto/dto/putProdutoInputDto';
 import { PutProdutoService } from '../services/putProduto/service/putProduto.service';
 import { GetProdutosByIdService } from '../services/getProdutosById/service/getProdutosById.service';
+import { GetProdutosOutPutDto } from '../services/getProdutos/dto/getProdutosOutPut.dto';
 
 @Controller('produto')
 export class ProdutoController {
@@ -33,9 +38,10 @@ export class ProdutoController {
     @ApiOkResponse({
         description: 'Produtos Listados com sucesso!',
     })
-    async listProduto() {
+    async listProduto(): Promise<GetProdutosOutPutDto[]> {
         return await this.getProdutos.execute();
     }
+
     @Get('/:id')
     @ApiOperation({ summary: 'Lista Produtos' })
     @ApiOkResponse({
@@ -48,23 +54,9 @@ export class ProdutoController {
     @Post()
     @ApiOperation({ summary: 'Produto será criado' })
     @ApiOkResponse({ description: 'Produto criado com sucesso!' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async createProduto(@Body() data: PostProdutosInputDto) {
-        const produto = new ProdutoEntity();
-        produto.id = randomUUID();
-        produto.id_usuario = data.id_usuario;
-        produto.nome = data.nome;
-        produto.valor = data.valor;
-        produto.quantidade = data.quantidade;
-        produto.descricao = data.descricao;
-        produto.categoria = data.categoria;
-        produto.caracteristica = data.caracteristica;
-        produto.imagem = data.imagem;
-        //analisar se é necessario fazer a instancia de entidade para atribuir valores do meu input dto
-        //acho que é necessario por conta que nao tenho binds ao passar os valores para o banco, por isso preciso atribuir esse valores no controller
-        //analisar se posso fazer essa atribuição em outro arquivo, service ou de preferencia maior, repository
         await this.postProdutosService.execute(data);
-
-        // analisar uma melhor abordagem para a criação do produto
     }
 
     @Put('/:id')

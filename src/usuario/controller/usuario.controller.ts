@@ -36,13 +36,6 @@ export class UsuarioController {
     @ApiOkResponse({ description: 'Usuário criado com sucesso' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async createUsuario(@Body() data: PostUsuarioInputDto) {
-        const usuario = new UsuarioEntity();
-
-        usuario.id = randomUUID();
-        usuario.nome = data.nome;
-        usuario.senha = data.senha;
-        usuario.email = data.email;
-
         await this.postUsuarioService.execute(data);
     }
 

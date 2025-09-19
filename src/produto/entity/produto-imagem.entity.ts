@@ -12,7 +12,6 @@ export class ProdutoImagemEntity {
     @Column({ name: 'descricao', length: 255, nullable: false })
     descricao: string;
 
-    @ManyToOne(() => ProdutoEntity, (produto) => produto.caracteristica)
-    produto: ProdutoEntity;
+    // @ManyToOne(() => ProdutoEntity, (produto) => produto.caracteristica)
+    // produto: ProdutoEntity;
 }
-
