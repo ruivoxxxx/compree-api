@@ -3,26 +3,20 @@ import {
     InternalServerErrorException,
     NotFoundException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ProdutoEntity } from 'src/produto/entity/produto.entity';
-import { Repository } from 'typeorm';
+
 import { PutProdutoInputDto } from '../dto/putProdutoInputDto';
+import { PutProdutoRepository } from '../repository/putProduto.repository';
 @Injectable()
 export class PutProdutoService {
-    constructor(
-        @InjectRepository(ProdutoEntity)
-        private readonly putProdutoRepository: Repository<ProdutoEntity>,
-    ) {}
+    constructor(private readonly putProdutoRepository: PutProdutoRepository) {}
 
     async execute(id: string, data: PutProdutoInputDto) {
         try {
-            const verify_produto = await this.putProdutoRepository.findOneBy({
-                id,
-            });
-            if (!verify_produto) {
+            const produto = await this.putProdutoRepository.buscaProduto(id);
+            if (!produto) {
                 throw new NotFoundException('Produto não Encontrado');
             }
-            await this.putProdutoRepository.save(verify_produto);
+            await this.putProdutoRepository.atualizaProduto(data);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
