@@ -8,7 +8,7 @@ import { PutUsuarioService } from './putUsuario/service/putUsuario.service';
 import { DeleteUsuarioService } from './deleteUsuario/service/deleteUsuario.service';
 import { PostUsuarioRepository } from './postUsuario/repository/postUsuarioRepository';
 import { GetUsuarioByIdService } from './getUsuarioById/service/getUsuarioById.service';
-import { GetUsuarioByIdRepository } from './getUsuarioById/repository/getUsuarioByIdRepository';
+import { GetUsuarioByIdRepository } from './getUsuarioById/repository/getUsuarioById.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([UsuarioEntity])],

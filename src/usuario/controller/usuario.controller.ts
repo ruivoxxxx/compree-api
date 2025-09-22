@@ -17,11 +17,11 @@ import {
 import { GetUsuarioService } from '../services/getUsuario/service/getUsuario.service';
 import { PostUsuarioService } from '../services/postUsuario/service/postUsuario.service';
 import { PostUsuarioInputDto } from '../services/postUsuario/dto/postUsuarioInputDto';
-import { PutProdutoInputDto } from 'src/produto/services/putProduto/dto/putProdutoInputDto';
 import { PutUsuarioInputDto } from '../services/putUsuario/dto/putUsuarioInputDto';
 import { PutUsuarioService } from '../services/putUsuario/service/putUsuario.service';
 import { DeleteUsuarioService } from '../services/deleteUsuario/service/deleteUsuario.service';
 import { GetUsuarioByIdService } from '../services/getUsuarioById/service/getUsuarioById.service';
+import { GetUsuarioOutputDto } from '../services/getUsuario/dto/getUsuarioOutputDto';
 @Controller('usuario')
 export class UsuarioController {
     constructor(
@@ -44,7 +44,7 @@ export class UsuarioController {
     @ApiOperation({ summary: 'Lista os usuários existentes' })
     @ApiOkResponse({ description: 'Usuários Listados Com Sucesso!' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
-    async listUsuario() {
+    async listUsuario(): Promise<GetUsuarioOutputDto[]> {
         return await this.getUsuarioService.execute();
     }
 
