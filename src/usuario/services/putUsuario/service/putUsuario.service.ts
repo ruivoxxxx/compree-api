@@ -16,15 +16,14 @@ export class PutUsuarioService {
     ) {}
     async execute(id: string, data: PutUsuarioInputDto) {
         try {
-            const verify_users = await this.putUsuarioRepository.findOneBy({
+            const usuario = await this.putUsuarioRepository.findOneBy({
                 id,
             });
-            if (!verify_users) {
+            if (usuario) {
                 throw new NotFoundException('Usuário Não Encontrado');
             }
-            Object.assign(verify_users, data);
-
-            await this.putUsuarioRepository.save(verify_users);
+            //testar em casa
+            // await this.putUsuarioRepository.save(usuario);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
