@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class PostUsuarioInputDto {
+    //acho que não é necessario
     @IsUUID()
     id: string;
 
@@ -19,13 +20,4 @@ export class PostUsuarioInputDto {
     @IsNotEmpty()
     @IsString()
     senha: string;
-
-    @ApiProperty()
-    created_at: Date;
-
-    @ApiProperty()
-    updated_at: Date;
-
-    @ApiProperty()
-    deleted_at: Date;
 }
