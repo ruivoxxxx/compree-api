@@ -8,11 +8,11 @@ import { GetProdutosOutPutDto } from '../dto/getProdutosOutPut.dto';
 export class GetProdutosRepository {
     constructor(
         @InjectRepository(ProdutoEntity)
-        private readonly getProdutosRepository: Repository<ProdutoEntity>,
+        private readonly dataBaseService: Repository<ProdutoEntity>,
     ) {}
 
     async getProdutos(): Promise<GetProdutosOutPutDto[]> {
-        return await this.getProdutosRepository.find({
+        return await this.dataBaseService.find({
             select: ['id', 'nome', 'valor', 'categoria', 'descricao'],
         });
     }
