@@ -1,23 +1,26 @@
-import { NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ProdutoEntity } from 'src/produto/entity/produto.entity';
-import { Repository } from 'typeorm';
+import {
+    InternalServerErrorException,
+    NotFoundException,
+} from '@nestjs/common';
+
+import { DeleteProdutoRepository } from '../repository/deleteProduto.repository';
 
 export class DeleteProdutoService {
     constructor(
-        @InjectRepository(ProdutoEntity)
-        private readonly deleteProdutoRepository: Repository<ProdutoEntity>,
+        private readonly deleteProdutoRepository: DeleteProdutoRepository,
     ) {}
 
-    async execute(data: ProdutoEntity) {
+    async execute(id: string) {
         try {
-            const verifyProduto =
-                await this.deleteProdutoRepository.findOneBy(data);
-            if (!verifyProduto) {
+            const produto = await this.deleteProdutoRepository.buscaProduto(id);
+            if (!produto) {
                 throw new NotFoundException('Produto Não Encontrado');
             }
-            await this.deleteProdutoRepository.delete(data); //deve apenas atualizar o delete ad e delete by
-        } catch (error) {}
+            await this.deleteProdutoRepository.deletaProduto(); //deve apenas atualizar o delete at e delete by
+        } catch (error) {
+            if (error instanceof NotFoundException) throw error;
+            throw new InternalServerErrorException(error.message);
+        }
     }
 }
 
