@@ -1,26 +1,14 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { Repository } from 'typeorm';
-
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { GetUsuariosInputDto } from '../dto/getUsuariosInputDto';
+import { GetUsuarioRepository } from '../repository/getUsuario.repository';
+import { GetUsuarioOutputDto } from '../dto/getUsuarioOutputDto';
 
 @Injectable()
 export class GetUsuarioService {
-    constructor(
-        @InjectRepository(UsuarioEntity)
-        private readonly getUsuarioRepository: Repository<UsuarioEntity>,
-    ) {}
+    constructor(private readonly getUsuarioRepository: GetUsuarioRepository) {}
 
-    async execute() {
+    async execute(): Promise<GetUsuarioOutputDto[]> {
         try {
-            const users = await this.getUsuarioRepository.find();
-
-            const users_list = users.map(
-                (usuarios) =>
-                    new GetUsuariosInputDto(usuarios.id, usuarios.nome),
-            );
-            return users_list;
+            return await this.getUsuarioRepository.getUsuarios();
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }
