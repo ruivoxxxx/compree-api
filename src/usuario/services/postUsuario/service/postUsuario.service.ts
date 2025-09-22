@@ -9,7 +9,7 @@ export class PostUsuarioService {
 
     async execute(data: PostUsuarioInputDto) {
         try {
-            return await this.postUsuarioRepository.createUsuario(data);
+            await this.postUsuarioRepository.createUsuario(data);
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }
