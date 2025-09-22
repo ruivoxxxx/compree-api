@@ -3,7 +3,7 @@ import {
     InternalServerErrorException,
     NotFoundException,
 } from '@nestjs/common';
-import { GetUsuarioByIdRepository } from '../repository/getUsuarioByIdRepository';
+import { GetUsuarioByIdRepository } from '../repository/getUsuarioById.repository';
 @Injectable()
 export class GetUsuarioByIdService {
     constructor(
