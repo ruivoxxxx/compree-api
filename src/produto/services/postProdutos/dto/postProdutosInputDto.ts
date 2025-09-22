@@ -8,7 +8,6 @@ import {
     IsUUID,
     Min,
 } from 'class-validator';
-import { ProdutoImagemEntity } from 'src/produto/entity/produto-imagem.entity';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 
 export class CaracteristicaProdutoDTO {

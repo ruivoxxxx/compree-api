@@ -5,9 +5,6 @@ export class GetProdutosOutPutDto {
     id: string;
 
     @ApiProperty()
-    id_usuario: string;
-
-    @ApiProperty()
     nome: string;
 
     @ApiProperty()
@@ -17,7 +14,5 @@ export class GetProdutosOutPutDto {
     descricao: string;
 
     @ApiProperty()
-    quantidade: number;
-
     categoria: string;
 }

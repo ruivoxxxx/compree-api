@@ -22,7 +22,6 @@ export class PutProdutoService {
             if (!verify_produto) {
                 throw new NotFoundException('Produto não Encontrado');
             }
-            Object.assign(verify_produto, data);
             await this.putProdutoRepository.save(verify_produto);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;

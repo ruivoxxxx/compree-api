@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 import { Repository } from 'typeorm';
 import { GetProdutoByIdOutPutDto } from '../dto/getProdutoByIdOutputDto';
+import { GetProdutosOutPutDto } from '../../getProdutos/dto/getProdutosOutPut.dto';
 @Injectable()
 export class GetProdutosByIdRepository {
     constructor(
@@ -11,8 +12,9 @@ export class GetProdutosByIdRepository {
     ) {}
 
     async getProdutoById(id: string) {
-        const result = await this.dataBaseService.findOneBy({ id });
-
-        return result || undefined;
+        return await this.dataBaseService.findOne({
+            select: ['id', 'nome', 'valor', 'categoria', 'descricao'],
+            where: { id: id },
+        });
     }
 }

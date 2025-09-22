@@ -9,7 +9,6 @@ import {
     Query,
 } from '@nestjs/common';
 import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
-import { GetProdutosInputDto } from '../services/getProdutos/dto/getProdutosInputDto';
 import {
     ApiInternalServerErrorResponse,
     ApiOkResponse,
@@ -17,8 +16,6 @@ import {
 } from '@nestjs/swagger';
 import { PostProdutosInputDto } from '../services/postProdutos/dto/postProdutosInputDto';
 import { PostProdutosService } from '../services/postProdutos/service/postProdutos.service';
-import { ProdutoEntity } from '../entity/produto.entity';
-import { randomUUID } from 'crypto';
 import { PutProdutoInputDto } from '../services/putProduto/dto/putProdutoInputDto';
 import { PutProdutoService } from '../services/putProduto/service/putProduto.service';
 import { GetProdutosByIdService } from '../services/getProdutosById/service/getProdutosById.service';
@@ -38,6 +35,7 @@ export class ProdutoController {
     @ApiOkResponse({
         description: 'Produtos Listados com sucesso!',
     })
+    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async listProduto(): Promise<GetProdutosOutPutDto[]> {
         return await this.getProdutos.execute();
     }
@@ -47,6 +45,7 @@ export class ProdutoController {
     @ApiOkResponse({
         description: 'Produtos Listados com sucesso!',
     })
+    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async listByIdProduto(@Param('id') id: string) {
         return await this.getProdutosByIdService.execute(id);
     }
@@ -62,6 +61,7 @@ export class ProdutoController {
     @Put('/:id')
     @ApiOperation({ summary: 'Produto será atualizado' })
     @ApiOkResponse({ description: 'Produto atualizado com sucesso!' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async updateProduto(
         @Param('id') id: string,
         @Body() data: PutProdutoInputDto,
@@ -72,5 +72,6 @@ export class ProdutoController {
     @Delete('/:id')
     @ApiOperation({ summary: 'Produto deletado criado' })
     @ApiOkResponse({ description: 'Produto deletado com sucesso!' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
     async deleteProduto(@Param('id') id: string) {}
 }

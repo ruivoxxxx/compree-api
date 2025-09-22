@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { GetProdutosInputDto } from '../dto/getProdutosInputDto';
+
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 import { Repository } from 'typeorm';
 // import { GetProdutosOutPutDto } from '../dto/getProdutosOutPut.dto';
@@ -16,19 +16,19 @@ export class GetProdutosService {
         try {
             const produtos = await this.getProdutosRepository.getProdutos();
 
-            const produtosLista = produtos.map(
-                (produto) =>
-                    new GetProdutosInputDto(
-                        produto.id,
-                        produto.id_usuario,
-                        produto.nome,
-                        produto.valor,
-                        produto.descricao,
-                        produto.quantidade,
-                        produto.categoria,
-                    ),
-            );
-            return produtosLista;
+            // const produtosLista = produtos.map(
+            //     (produto) =>
+            //         new GetProdutosInputDto(
+            //             produto.id,
+            //             produto.id_usuario,
+            //             produto.nome,
+            //             produto.valor,
+            //             produto.descricao,
+            //             produto.quantidade,
+            //             // produto.categoria,
+            //         ),
+            // );
+            return produtos;
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }
