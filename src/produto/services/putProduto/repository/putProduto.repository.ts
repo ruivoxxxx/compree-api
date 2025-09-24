@@ -2,7 +2,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 import { Repository } from 'typeorm';
 import { PutProdutoInputDto } from '../dto/putProdutoInputDto';
-
+import { Injectable } from '@nestjs/common';
+@Injectable()
 export class PutProdutoRepository {
     constructor(
         @InjectRepository(ProdutoEntity)
@@ -10,9 +11,21 @@ export class PutProdutoRepository {
     ) {}
 
     async buscaProduto(id: string) {
-        return undefined;
+        return await this.dataBaseService.findOneBy({ id });
     }
 
-    async atualizaProduto(data: PutProdutoInputDto) {}
+    async atualizaProduto(data: PutProdutoInputDto) {
+        await this.dataBaseService
+            .createQueryBuilder()
+            .update(ProdutoEntity)
+            .set({
+                nome: data.nome,
+                valor: data.valor,
+                descricao: data.descricao,
+                categoria: data.categoria,
+                updated_at: () => 'NOW()',
+            })
+            .where('id= :id', { id: data.id })
+            .execute();
+    }
 }
-

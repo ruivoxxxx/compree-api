@@ -47,8 +47,8 @@ export class ProdutoEntity {
     // @CreateDateColumn({ name: 'created_at' })
     // created_at;
 
-    // @CreateDateColumn({ name: 'updated_at' })
-    // updated_at;
+    @CreateDateColumn({ name: 'updated_at', type: 'timestamp' })
+    updated_at;
 
     // @CreateDateColumn({ name: 'deleted_at' })
     // deleted_at;

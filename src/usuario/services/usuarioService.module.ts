@@ -9,18 +9,24 @@ import { DeleteUsuarioService } from './deleteUsuario/service/deleteUsuario.serv
 import { PostUsuarioRepository } from './postUsuario/repository/postUsuarioRepository';
 import { GetUsuarioByIdService } from './getUsuarioById/service/getUsuarioById.service';
 import { GetUsuarioByIdRepository } from './getUsuarioById/repository/getUsuarioById.repository';
+import { GetUsuarioRepository } from './getUsuario/repository/getUsuario.repository';
+import { DeleteUsuarioRepository } from './deleteUsuario/repository/deleteUsuario.repository';
+import { PutUsuarioRepository } from './putUsuario/repository/putUsuario.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([UsuarioEntity])],
     controllers: [UsuarioController],
     providers: [
         GetUsuarioService,
+        GetUsuarioRepository,
         GetUsuarioByIdService,
         GetUsuarioByIdRepository,
         PostUsuarioService,
         PostUsuarioRepository,
         PutUsuarioService,
+        PutUsuarioRepository,
         DeleteUsuarioService,
+        DeleteUsuarioRepository,
     ],
 })
 export class UsuarioModuleService {}

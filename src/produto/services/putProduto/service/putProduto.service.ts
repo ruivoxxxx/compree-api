@@ -3,7 +3,6 @@ import {
     InternalServerErrorException,
     NotFoundException,
 } from '@nestjs/common';
-
 import { PutProdutoInputDto } from '../dto/putProdutoInputDto';
 import { PutProdutoRepository } from '../repository/putProduto.repository';
 @Injectable()
@@ -16,6 +15,7 @@ export class PutProdutoService {
             if (!produto) {
                 throw new NotFoundException('Produto não Encontrado');
             }
+            console.log(data);
             await this.putProdutoRepository.atualizaProduto(data);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;

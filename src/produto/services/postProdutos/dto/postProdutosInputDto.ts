@@ -42,8 +42,8 @@ export class ImagemProdutoDTO {
     produto: ProdutoEntity;
 }
 export class PostProdutosInputDto {
-    @IsUUID()
-    id: string;
+    // @ApiProperty()
+    // id: string;
 
     @ApiProperty()
     @IsNotEmpty({ message: 'Id de Usuário não pode ser vazio' })
@@ -77,9 +77,9 @@ export class PostProdutosInputDto {
     @IsNotEmpty({ message: 'Categoria do Produto não pode ser vazio' })
     categoria: string;
 
-    @ApiProperty()
-    caracteristica: CaracteristicaProdutoDTO[];
+    // @ApiProperty()
+    // caracteristica: CaracteristicaProdutoDTO[];
 
-    @ApiProperty()
-    imagem: ImagemProdutoDTO[];
+    // @ApiProperty()
+    // imagem: ImagemProdutoDTO[];
 }

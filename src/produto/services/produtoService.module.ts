@@ -8,6 +8,7 @@ import { PutProdutoService } from './putProduto/service/putProduto.service';
 import { GetProdutosByIdService } from './getProdutosById/service/getProdutosById.service';
 import { GetProdutosRepository } from './getProdutos/repository/getProdutos.repository';
 import { GetProdutosByIdRepository } from './getProdutosById/repository/getProdutosById.repository';
+import { PutProdutoRepository } from './putProduto/repository/putProduto.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ProdutoEntity])],
@@ -17,6 +18,7 @@ import { GetProdutosByIdRepository } from './getProdutosById/repository/getProdu
         GetProdutosRepository,
         PostProdutosService,
         PutProdutoService,
+        PutProdutoRepository,
         GetProdutosByIdService,
         GetProdutosByIdRepository,
     ],
