@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { GetProdutoByIdOutPutDto } from '../dto/getProdutoByIdOutputDto';
 import { GetProdutosOutPutDto } from '../../getProdutos/dto/getProdutosOutPut.dto';
 @Injectable()
-export class GetProdutosByIdRepository {
+export class GetProdutoByIdRepository {
     constructor(
         @InjectRepository(ProdutoEntity)
         private readonly dataBaseService: Repository<ProdutoEntity>,

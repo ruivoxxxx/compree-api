@@ -4,11 +4,11 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { GetProdutoByIdOutPutDto } from '../dto/getProdutoByIdOutputDto';
-import { GetProdutosByIdRepository } from '../repository/getProdutosById.repository';
+import { GetProdutoByIdRepository } from '../repository/getProdutoById.repository';
 @Injectable()
-export class GetProdutosByIdService {
+export class GetProdutoByIdService {
     constructor(
-        private readonly getProdutoByIdRepository: GetProdutosByIdRepository,
+        private readonly getProdutoByIdRepository: GetProdutoByIdRepository,
     ) {}
 
     async execute(id: string): Promise<GetProdutoByIdOutPutDto> {

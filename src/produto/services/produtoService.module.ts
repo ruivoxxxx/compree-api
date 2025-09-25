@@ -1,14 +1,19 @@
 import { Module } from '@nestjs/common';
 import { ProdutoController } from '../controller/produto.controller';
-import { GetProdutosService } from './getProdutos/service/getProdutos.service';
+
 import { ProdutoEntity } from '../entity/produto.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PostProdutosService } from './postProdutos/service/postProdutos.service';
+import { PostProdutoService } from './postProduto/service/postProdutos.service';
 import { PutProdutoService } from './putProduto/service/putProduto.service';
-import { GetProdutosByIdService } from './getProdutosById/service/getProdutosById.service';
-import { GetProdutosRepository } from './getProdutos/repository/getProdutos.repository';
-import { GetProdutosByIdRepository } from './getProdutosById/repository/getProdutosById.repository';
+import { GetProdutoByIdService } from './getProdutoById/service/getProdutoById.service';
+
+import { GetProdutoByIdRepository } from './getProdutoById/repository/getProdutoById.repository';
 import { PutProdutoRepository } from './putProduto/repository/putProduto.repository';
+import { DeleteProdutoService } from './deleteProduto/service/deleteProduto.service';
+import { DeleteProdutoRepository } from './deleteProduto/repository/deleteProduto.repository';
+import { PostProdutoRepository } from './postProduto/repository/postProdutos.repositor';
+import { GetProdutosService } from './getProdutos/service/getProdutos.service';
+import { GetProdutosRepository } from './getProdutos/repository/getProdutos.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ProdutoEntity])],
@@ -16,11 +21,14 @@ import { PutProdutoRepository } from './putProduto/repository/putProduto.reposit
     providers: [
         GetProdutosService,
         GetProdutosRepository,
-        PostProdutosService,
+        GetProdutoByIdService,
+        GetProdutoByIdRepository,
+        PostProdutoService,
+        PostProdutoRepository,
         PutProdutoService,
         PutProdutoRepository,
-        GetProdutosByIdService,
-        GetProdutosByIdRepository,
+        DeleteProdutoService,
+        DeleteProdutoRepository,
     ],
 })
 export class ProdutoServiceModule {}

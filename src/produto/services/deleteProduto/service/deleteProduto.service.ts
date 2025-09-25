@@ -1,10 +1,11 @@
 import {
+    Injectable,
     InternalServerErrorException,
     NotFoundException,
 } from '@nestjs/common';
-
 import { DeleteProdutoRepository } from '../repository/deleteProduto.repository';
 
+@Injectable()
 export class DeleteProdutoService {
     constructor(
         private readonly deleteProdutoRepository: DeleteProdutoRepository,
@@ -16,11 +17,10 @@ export class DeleteProdutoService {
             if (!produto) {
                 throw new NotFoundException('Produto Não Encontrado');
             }
-            await this.deleteProdutoRepository.deletaProduto(); //deve apenas atualizar o delete at e delete by
+            await this.deleteProdutoRepository.deletaProduto(id);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
         }
     }
 }
-

@@ -41,9 +41,10 @@ export class ImagemProdutoDTO {
     @ApiProperty()
     produto: ProdutoEntity;
 }
-export class PostProdutosInputDto {
-    // @ApiProperty()
-    // id: string;
+export class PostProdutoInputDto {
+    @ApiProperty()
+    @IsOptional()
+    id: string;
 
     @ApiProperty()
     @IsNotEmpty({ message: 'Id de Usuário não pode ser vazio' })
@@ -58,7 +59,7 @@ export class PostProdutosInputDto {
     @ApiProperty({})
     @IsNumber()
     @IsNotEmpty({ message: 'Valor do Produto não pode ser vazio' })
-    @Min(1, { message: 'O valor precisa ser maior que 0' })
+    @Min(1)
     valor: number;
 
     @ApiProperty()

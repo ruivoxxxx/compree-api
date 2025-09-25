@@ -12,9 +12,8 @@ import {
 import {
     CaracteristicaProdutoDTO,
     ImagemProdutoDTO,
-} from '../../postProdutos/dto/postProdutosInputDto';
+} from '../../postProduto/dto/postProdutosInputDto';
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateDateColumn } from 'typeorm';
 
 export class PutProdutoInputDto {
     @ApiProperty()
@@ -28,20 +27,17 @@ export class PutProdutoInputDto {
 
     @ApiProperty()
     @IsString()
-    @IsNotEmpty({ message: 'Nome do produto não pode ser vazio' })
     @IsOptional()
     nome: string;
 
     @ApiProperty()
-    @IsNumber({ maxDecimalPlaces: 2, allowNaN: false, allowInfinity: false })
-    @IsOptional()
-    @Min(1, { message: 'O valor precisa ser maior que zero' })
+    @Min(1)
     @IsOptional()
     valor: number;
 
     @ApiProperty()
     @IsNumber()
-    @Min(0, { message: 'Quantidade mínima inválida' })
+    @Min(0)
     @IsOptional()
     quantidadeDisponivel: number;
 
@@ -52,13 +48,8 @@ export class PutProdutoInputDto {
 
     @ApiProperty()
     @IsString()
-    @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })
     @IsOptional()
     categoria: string;
-
-    // @ApiProperty()
-    // @IsOptional()
-    // updated_at: Date;
 
     @ApiProperty()
     @ValidateNested()

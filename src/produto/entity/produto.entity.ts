@@ -50,6 +50,6 @@ export class ProdutoEntity {
     @CreateDateColumn({ name: 'updated_at', type: 'timestamp' })
     updated_at;
 
-    // @CreateDateColumn({ name: 'deleted_at' })
-    // deleted_at;
+    @CreateDateColumn({ name: 'deleted_at' })
+    deleted_at;
 }

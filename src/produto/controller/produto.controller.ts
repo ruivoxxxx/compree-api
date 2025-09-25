@@ -8,26 +8,29 @@ import {
     Put,
     Query,
 } from '@nestjs/common';
-import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
+
 import {
     ApiInternalServerErrorResponse,
     ApiOkResponse,
     ApiOperation,
 } from '@nestjs/swagger';
-import { PostProdutosInputDto } from '../services/postProdutos/dto/postProdutosInputDto';
-import { PostProdutosService } from '../services/postProdutos/service/postProdutos.service';
+import { PostProdutoInputDto } from '../services/postProduto/dto/postProdutosInputDto';
+import { PostProdutoService } from '../services/postProduto/service/postProdutos.service';
 import { PutProdutoInputDto } from '../services/putProduto/dto/putProdutoInputDto';
 import { PutProdutoService } from '../services/putProduto/service/putProduto.service';
-import { GetProdutosByIdService } from '../services/getProdutosById/service/getProdutosById.service';
+import { GetProdutoByIdService } from '../services/getProdutoById/service/getProdutoById.service';
 import { GetProdutosOutPutDto } from '../services/getProdutos/dto/getProdutosOutPut.dto';
+import { DeleteProdutoService } from '../services/deleteProduto/service/deleteProduto.service';
+import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
 
 @Controller('produto')
 export class ProdutoController {
     constructor(
         private readonly getProdutos: GetProdutosService,
-        private readonly postProdutosService: PostProdutosService,
+        private readonly getProdutosByIdService: GetProdutoByIdService,
+        private readonly postProdutosService: PostProdutoService,
         private readonly putProdutosService: PutProdutoService,
-        private readonly getProdutosByIdService: GetProdutosByIdService,
+        private readonly deleteProdutoService: DeleteProdutoService,
     ) {}
 
     @Get()
@@ -54,7 +57,7 @@ export class ProdutoController {
     @ApiOperation({ summary: 'Produto será criado' })
     @ApiOkResponse({ description: 'Produto criado com sucesso!' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
-    async createProduto(@Body() data: PostProdutosInputDto) {
+    async createProduto(@Body() data: PostProdutoInputDto) {
         await this.postProdutosService.execute(data);
     }
 
@@ -73,5 +76,7 @@ export class ProdutoController {
     @ApiOperation({ summary: 'Produto deletado criado' })
     @ApiOkResponse({ description: 'Produto deletado com sucesso!' })
     @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
-    async deleteProduto(@Param('id') id: string) {}
+    async deleteProduto(@Param('id') id: string) {
+        await this.deleteProdutoService.execute(id);
+    }
 }
