@@ -4,7 +4,7 @@ import {
     InternalServerErrorException,
 } from '@nestjs/common';
 import { PostProdutoInputDto } from '../dto/postProdutosInputDto';
-import { PostProdutoRepository } from '../repository/postProdutos.repositor';
+import { PostProdutoRepository } from '../repository/postProdutos.repository';
 @Injectable()
 export class PostProdutoService {
     constructor(
