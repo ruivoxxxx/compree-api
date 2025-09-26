@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { PutProdutoInputDto } from '../dto/putProdutoInputDto';
 import { Injectable } from '@nestjs/common';
 @Injectable()
@@ -11,7 +11,10 @@ export class PutProdutoRepository {
     ) {}
 
     async buscaProduto(id: string) {
-        return await this.dataBaseService.findOneBy({ id });
+        return await this.dataBaseService.findOne({
+            select: ['id'],
+            where: { deleted_at: IsNull() },
+        });
     }
 
     async atualizaProduto(data: PutProdutoInputDto) {
@@ -25,7 +28,7 @@ export class PutProdutoRepository {
                 categoria: data.categoria,
                 updated_at: () => 'NOW()',
             })
-            .where('id= :id', { id: data.id })
+            .where('id= :id', { id: data.id, deleted_at: IsNull() })
             .execute();
     }
 }
