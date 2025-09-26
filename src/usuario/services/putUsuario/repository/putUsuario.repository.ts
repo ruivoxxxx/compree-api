@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { PutUsuarioInputDto } from '../dto/putUsuarioInputDto';
 import { Injectable } from '@nestjs/common';
 @Injectable()
@@ -11,7 +11,10 @@ export class PutUsuarioRepository {
     ) {}
 
     async buscaUsuario(id: string) {
-        return await this.dataBaseService.findOneBy({ id });
+        return await this.dataBaseService.findOne({
+            select: ['id'],
+            where: { deleted_at: IsNull() },
+        });
     }
 
     async atualizaUsuario(data: PutUsuarioInputDto) {
@@ -24,7 +27,7 @@ export class PutUsuarioRepository {
                 senha: data.senha,
                 updated_at: () => 'CURRENT_TIMESTAMP',
             })
-            .where('id= :id', { id: data.id })
+            .where('id= :id', { id: data.id, deleted_at: IsNull() })
             .execute();
     }
 }
