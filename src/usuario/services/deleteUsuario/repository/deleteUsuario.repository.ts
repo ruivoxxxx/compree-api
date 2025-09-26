@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 @Injectable()
 export class DeleteUsuarioRepository {
     constructor(
@@ -9,7 +9,16 @@ export class DeleteUsuarioRepository {
         private readonly dataBaseService: Repository<UsuarioEntity>,
     ) {}
     async buscaUsuario(id: string) {
-        return undefined;
+        return await this.dataBaseService.findOne({
+            select: ['id'],
+            where: { deleted_at: IsNull() },
+        });
     }
-    async deletaUsuario() {}
+    async deletaUsuario(id: string) {
+        await this.dataBaseService
+            .createQueryBuilder()
+            .update(UsuarioEntity)
+            .set({ deleted_at: () => 'NOW()' })
+            .where('id=:id', { id: id, deleted_at: IsNull() }).execute;
+    }
 }

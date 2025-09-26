@@ -17,7 +17,7 @@ export class DeleteUsuarioService {
                 throw new NotFoundException('Usuário Não Encontrado');
             }
 
-            return await this.deleteUsuarioRepository.deletaUsuario();
+            return await this.deleteUsuarioRepository.deletaUsuario(id);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
