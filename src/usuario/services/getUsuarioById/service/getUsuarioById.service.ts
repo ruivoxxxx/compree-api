@@ -19,6 +19,7 @@ export class GetUsuarioByIdService {
             }
             return result;
         } catch (error) {
+            if (error instanceof NotFoundException) throw error;
             throw new InternalServerErrorException(error.message);
         }
     }

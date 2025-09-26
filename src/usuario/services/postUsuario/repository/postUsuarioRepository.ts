@@ -7,9 +7,9 @@ import { Injectable } from '@nestjs/common';
 export class PostUsuarioRepository {
     constructor(
         @InjectRepository(UsuarioEntity)
-        private readonly dataBase: Repository<UsuarioEntity>,
+        private readonly dataBaseService: Repository<UsuarioEntity>,
     ) {}
     async createUsuario(data: PostUsuarioInputDto) {
-        await this.dataBase.save(data);
+        await this.dataBaseService.save(data);
     }
 }
