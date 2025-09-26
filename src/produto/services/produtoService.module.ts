@@ -11,7 +11,7 @@ import { GetProdutoByIdRepository } from './getProdutoById/repository/getProduto
 import { PutProdutoRepository } from './putProduto/repository/putProduto.repository';
 import { DeleteProdutoService } from './deleteProduto/service/deleteProduto.service';
 import { DeleteProdutoRepository } from './deleteProduto/repository/deleteProduto.repository';
-import { PostProdutoRepository } from './postProduto/repository/postProdutos.repositor';
+import { PostProdutoRepository } from './postProduto/repository/postProdutos.repository';
 import { GetProdutosService } from './getProdutos/service/getProdutos.service';
 import { GetProdutosRepository } from './getProdutos/repository/getProdutos.repository';
 
