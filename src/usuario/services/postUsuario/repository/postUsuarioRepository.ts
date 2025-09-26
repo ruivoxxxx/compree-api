@@ -10,6 +10,16 @@ export class PostUsuarioRepository {
         private readonly dataBaseService: Repository<UsuarioEntity>,
     ) {}
     async createUsuario(data: PostUsuarioInputDto) {
-        await this.dataBaseService.save(data);
+        await this.dataBaseService
+            .createQueryBuilder()
+            .insert()
+            .into(UsuarioEntity)
+            .values({
+                nome: () => 'UPPER(:nome)',
+                email: data.email,
+                senha: data.senha,
+            })
+            .setParameters({ nome: data.nome })
+            .execute();
     }
 }
