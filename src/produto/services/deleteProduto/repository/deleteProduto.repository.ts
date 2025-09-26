@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 Injectable();
 export class DeleteProdutoRepository {
@@ -10,7 +10,10 @@ export class DeleteProdutoRepository {
     ) {}
 
     async buscaProduto(id: string) {
-        return await this.dataBaseService.findOneBy({ id });
+        return await this.dataBaseService.findOne({
+            select: ['id'],
+            where: { id: id, deleted_at: IsNull() },
+        });
     }
 
     async deletaProduto(id: string) {
@@ -20,7 +23,7 @@ export class DeleteProdutoRepository {
             .set({
                 deleted_at: () => 'NOW()',
             })
-            .where('id= :id', { id: id })
+            .where('id= :id', { id: id, deleted_at: IsNull() })
             .execute();
     }
 }
