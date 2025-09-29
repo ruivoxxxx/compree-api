@@ -2,11 +2,11 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ProdutoCaracteristicaEntity } from './produto-caracteristica.entity';
-import { ProdutoImagemEntity } from './produto-imagem.entity';
+// import { ProdutoCaracteristicaEntity } from './produto-caracteristica.entity';
+// import { ProdutoImagemEntity } from './produto-imagem.entity';
+
 @Entity({ name: 'produtos' })
 export class ProdutoEntity {
     @PrimaryGeneratedColumn('uuid')

@@ -28,4 +28,3 @@ export class UsuarioEntity {
     @CreateDateColumn({ name: 'deleted_at' })
     deleted_at;
 }
-
