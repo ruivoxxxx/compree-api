@@ -1,25 +1,21 @@
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
+// import { ProdutoEntity } from './produto.entity';
 
-@Entity('produto-caracteristica')
-export class ProdutoCaracteristica {
-  @Column({ name: 'nome', length: 100 })
+@Entity('produto_caracteristica')
+export class ProdutoCaracteristicaEntity {
+  @PrimaryColumn('uuid')
+  id: string;
+
+  @Column({ name: 'nome', length: 100, nullable: false })
   nome: string;
 
-  @Column({ name: 'descricao', length: 255 })
+  @Column({ name: 'descricao', length: 255, nullable: false })
   descricao: string;
 
-  @CreateDateColumn({ name: 'created_at' })
-  created_at;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updated_at;
-
-  @DeleteDateColumn({ name: 'deleted_at' })
-  deleted_at;
+  // @ManyToOne(() => ProdutoEntity, (produto) => produto.caracteristica, {
+  //     orphanedRowAction: 'delete',
+  //     onDelete: 'CASCADE',
+  //     onUpdate: 'CASCADE',
+  // })
+  // produto: ProdutoEntity;
 }
