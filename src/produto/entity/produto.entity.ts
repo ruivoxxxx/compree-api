@@ -12,8 +12,8 @@ export class ProdutoEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'id_usuario', length: '255', nullable: false })
-    id_usuario: string;
+    // @Column({ name: 'id_usuario', length: '255', nullable: false })
+    // id_usuario: string;
 
     @Column({ name: 'nome', length: '255', nullable: false })
     nome: string;

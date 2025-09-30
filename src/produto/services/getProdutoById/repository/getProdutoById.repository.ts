@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 import { IsNull, Repository } from 'typeorm';
 import { GetProdutoByIdOutPutDto } from '../dto/getProdutoByIdOutputDto';
-import { GetProdutosOutPutDto } from '../../getProdutos/dto/getProdutosOutPut.dto';
+
 @Injectable()
 export class GetProdutoByIdRepository {
     constructor(

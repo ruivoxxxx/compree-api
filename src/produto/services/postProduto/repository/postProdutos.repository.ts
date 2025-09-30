@@ -28,7 +28,6 @@ export class PostProdutoRepository {
                 quantidade: data.quantidade,
                 descricao: data.descricao,
                 categoria: data.categoria,
-                id_usuario: data.id_usuario,
             })
             .setParameters({ nome: data.nome })
             .execute();

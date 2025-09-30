@@ -19,9 +19,9 @@ import { PostProdutoService } from '../services/postProduto/service/postProdutos
 import { PutProdutoInputDto } from '../services/putProduto/dto/putProdutoInputDto';
 import { PutProdutoService } from '../services/putProduto/service/putProduto.service';
 import { GetProdutoByIdService } from '../services/getProdutoById/service/getProdutoById.service';
-import { GetProdutosOutPutDto } from '../services/getProdutos/dto/getProdutosOutPut.dto';
 import { DeleteProdutoService } from '../services/deleteProduto/service/deleteProduto.service';
 import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
+import { GetProdutosOutPutDto } from '../services/getProdutos/dto/getProdutosOutPut.dto';
 
 @Controller('produto')
 export class ProdutoController {

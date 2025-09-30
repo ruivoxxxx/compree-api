@@ -1,6 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { GetProdutosRepository } from '../repository/getProdutos.repository';
 import { GetProdutosOutPutDto } from '../dto/getProdutosOutPut.dto';
+
 @Injectable()
 export class GetProdutosService {
     constructor(
