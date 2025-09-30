@@ -9,9 +9,9 @@ import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
 @Injectable()
 export class PostgresConfigService implements TypeOrmOptionsFactory {
     constructor(private readonly configService: ConfigService) {}
-    createTypeOrmOptions(
-        connectionName?: string,
-    ): Promise<TypeOrmModuleOptions> | TypeOrmModuleOptions {
+    createTypeOrmOptions():
+        | Promise<TypeOrmModuleOptions>
+        | TypeOrmModuleOptions {
         return {
             type: 'postgres',
             host: this.configService.get<string>('DB_HOST'),
@@ -36,4 +36,3 @@ export const pool = new Pool({
     password: 'DB_PASSWORD',
     port: 5432,
 });
-
