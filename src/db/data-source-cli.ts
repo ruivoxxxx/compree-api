@@ -4,6 +4,7 @@ import { ProdutoEntity } from '../produto/entity/produto.entity';
 import { UsuarioEntity } from '../usuario/entity/usuario.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import 'dotenv/config';
+import { PedidosEntity } from '../pedidos/entity/pedidos.entity';
 const dataSourceOptions: DataSourceOptions = {
     type: 'postgres',
     host: process.env.DB_HOST,
@@ -16,9 +17,10 @@ const dataSourceOptions: DataSourceOptions = {
         UsuarioEntity,
         ProdutoImagemEntity,
         ProdutoCaracteristicaEntity,
+        PedidosEntity,
     ],
     synchronize: false,
-    migrations: [__dirname + '/migrations/*.{js,ts'],
+    migrations: ['src/db/migrations/*.{js,ts}'],
 };
 
 const dataSource = new DataSource(dataSourceOptions);

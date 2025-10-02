@@ -15,19 +15,19 @@ export class ProdutoEntity {
     // @Column({ name: 'id_usuario', length: '255', nullable: false })
     // id_usuario: string;
 
-    @Column({ name: 'nome', length: '255', nullable: false })
+    @Column({ name: 'nome', length: '255', nullable: true })
     nome: string;
 
-    @Column({ name: 'valor', nullable: false })
+    @Column({ name: 'valor', nullable: true })
     valor: number;
 
-    @Column({ name: 'quantidade', nullable: false })
+    @Column({ name: 'quantidade', nullable: true })
     quantidade: number;
 
-    @Column({ name: 'descricao', length: '255', nullable: false })
+    @Column({ name: 'descricao', length: '255', nullable: true })
     descricao: string;
 
-    @Column({ name: 'categoria', length: '100', nullable: false })
+    @Column({ name: 'categoria', length: '100', nullable: true })
     categoria: string;
 
     // @OneToMany(
