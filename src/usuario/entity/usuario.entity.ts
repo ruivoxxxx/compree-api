@@ -1,4 +1,4 @@
-import { PedidosEntity } from '../../pedidos/entity/pedidos.entity';
+import { PedidosEntity } from '../../pedidos/entity/pedido.entity';
 import {
     Column,
     CreateDateColumn,
@@ -21,13 +21,13 @@ export class UsuarioEntity {
     @Column({ name: 'senha', length: 255, nullable: true })
     senha: string;
 
-    @CreateDateColumn({ name: 'created_at' })
+    @Column({ name: 'created_at', type: 'timestamp', nullable: true })
     created_at;
 
-    @CreateDateColumn({ name: 'updated_at' })
+    @Column({ name: 'updated_at', type: 'timestamp', nullable: true })
     updated_at;
 
-    @CreateDateColumn({ name: 'deleted_at', nullable: true })
+    @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
     deleted_at;
 
     @OneToMany(() => PedidosEntity, (pedido) => pedido.usuario)

@@ -12,9 +12,6 @@ export class ProdutoEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    // @Column({ name: 'id_usuario', length: '255', nullable: false })
-    // id_usuario: string;
-
     @Column({ name: 'nome', length: '255', nullable: true })
     nome: string;
 
@@ -29,6 +26,14 @@ export class ProdutoEntity {
 
     @Column({ name: 'categoria', length: '100', nullable: true })
     categoria: string;
+    @Column({ name: 'created_at', type: 'timestamp', nullable: true })
+    created_at;
+
+    @Column({ name: 'updated_at', type: 'timestamp', nullable: true })
+    updated_at;
+
+    @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
+    deleted_at;
 
     // @OneToMany(
     //     () => ProdutoCaracteristicaEntity,
@@ -43,13 +48,4 @@ export class ProdutoEntity {
     //     { cascade: true, eager: true },
     // )
     // imagem: ProdutoImagemEntity[];
-
-    // @CreateDateColumn({ name: 'created_at' })
-    // created_at;
-
-    @CreateDateColumn({ name: 'updated_at', type: 'timestamp' })
-    updated_at;
-
-    @CreateDateColumn({ name: 'deleted_at' })
-    deleted_at;
 }
