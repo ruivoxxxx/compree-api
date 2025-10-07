@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Query } from '@nestjs/common';
-import { PedidoService } from '../services/postPedido/service/pedido.service';
+import { PedidoService } from '../services/postPedido/service/postPedido.service';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { GetPedidoByIdService } from '../services/getPedidoById/service/getPedidoById.service';
 import { GetPedidoByIdInputDto } from '../services/getPedidoById/dto/getProdutoByIdInputDto';
