@@ -1,0 +1,35 @@
+import { StatusPedido } from '../../enum/statuspedido.enum';
+import { UsuarioEntity } from '../../usuario/entity/usuario.entity';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
+
+@Entity({ name: 'pedidos' })
+export class PedidosEntity {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+
+    @Column({ name: 'valor_total', length: 255, nullable: true })
+    valor_total: string;
+
+    @Column({ name: 'status', enum: StatusPedido, nullable: true })
+    status: StatusPedido;
+
+    @Column({ name: 'created_at', type: 'timestamp', nullable: true })
+    created_at;
+
+    @Column({ name: 'updated_at', type: 'timestamp', nullable: true })
+    updated_at;
+
+    @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
+    deleted_at;
+
+    @ManyToOne(() => UsuarioEntity, (usuario) => usuario.pedidos, {
+        eager: true,
+    })
+    usuario: UsuarioEntity;
+}
