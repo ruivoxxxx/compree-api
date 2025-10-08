@@ -4,12 +4,12 @@ import { Module } from '@nestjs/common';
 import { PedidoController } from '../controller/pedido.controller';
 import { PedidoService } from './postPedido/service/postPedido.service';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { GetPedidoByIdRepository } from './getPedidoById/repository/getPedidoById.repository';
-import { GetPedidoByIdService } from './getPedidoById/service/getPedidoById.service';
+import { GetPedidoService } from './getPedido/service/getPedido.service';
+import { GetPedidoRepository } from './getPedido/repository/getPedido.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([PedidosEntity, UsuarioEntity])],
     controllers: [PedidoController],
-    providers: [PedidoService, GetPedidoByIdService, GetPedidoByIdRepository],
+    providers: [PedidoService, GetPedidoService, GetPedidoRepository],
 })
 export class PedidosServiceModule {}
