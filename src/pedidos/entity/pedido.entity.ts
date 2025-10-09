@@ -2,11 +2,12 @@ import { StatusPedido } from '../../enum/statuspedido.enum';
 import { UsuarioEntity } from '../../usuario/entity/usuario.entity';
 import {
     Column,
-    CreateDateColumn,
     Entity,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ItemPedidoEntity as ItemPedidoEntity } from './itemPedido.entity';
 
 @Entity({ name: 'pedidos' })
 export class PedidosEntity {
@@ -32,4 +33,9 @@ export class PedidosEntity {
         eager: true,
     })
     usuario: UsuarioEntity;
+
+    @ManyToOne(() => ItemPedidoEntity, (itemPedido) => itemPedido.pedido, {
+        cascade: true,
+    })
+    itemPedido: ItemPedidoEntity[];
 }
