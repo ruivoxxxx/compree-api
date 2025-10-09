@@ -5,6 +5,7 @@ import { UsuarioEntity } from '../usuario/entity/usuario.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import 'dotenv/config';
 import { PedidosEntity } from '../pedidos/entity/pedido.entity';
+import { ItemPedidoEntity } from 'src/pedidos/entity/itemPedido.entity';
 const dataSourceOptions: DataSourceOptions = {
     type: 'postgres',
     host: process.env.DB_HOST,
@@ -18,6 +19,7 @@ const dataSourceOptions: DataSourceOptions = {
         ProdutoImagemEntity,
         ProdutoCaracteristicaEntity,
         PedidosEntity,
+        ItemPedidoEntity,
     ],
     synchronize: false,
     migrations: ['src/db/migrations/*.{js,ts}'],
