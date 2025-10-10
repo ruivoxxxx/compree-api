@@ -1,22 +1,38 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+    IsArray,
+    IsNotEmpty,
+    IsNumber,
+    IsOptional,
+    IsString,
+    IsUUID,
+} from 'class-validator';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
 
-export class PedidoInputDto {
+class ItemPedidoDto {
+    @ApiProperty()
+    @IsUUID()
+    produtoId: string;
+
+    @ApiProperty()
+    @IsNumber()
+    quantidade: number;
+}
+export class PostPedidoInputDto {
     @ApiProperty()
     @IsOptional()
     @IsString()
-    valor_total: string;
+    valor_total?: string;
 
     @ApiProperty()
     @IsOptional()
     @IsString()
-    status: string;
+    status?: string;
 
     @ApiProperty()
     @IsOptional()
-    @IsString()
-    itens_pedido: string;
+    @IsArray()
+    itens_pedido: ItemPedidoDto[];
 
     @ApiProperty()
     usuario: UsuarioEntity;

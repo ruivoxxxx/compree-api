@@ -1,7 +1,9 @@
+import { ItemPedidoEntity } from 'src/pedidos/entity/itemPedido.entity';
 import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 // import { ProdutoCaracteristicaEntity } from './produto-caracteristica.entity';
@@ -34,6 +36,9 @@ export class ProdutoEntity {
 
     @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
     deleted_at;
+
+    @OneToMany(() => ItemPedidoEntity, (itemPedido) => itemPedido.pedido)
+    itemPedido: ItemPedidoEntity[];
 
     // @OneToMany(
     //     () => ProdutoCaracteristicaEntity,

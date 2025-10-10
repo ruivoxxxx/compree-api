@@ -7,7 +7,11 @@ import { PedidosEntity } from 'src/pedidos/entity/pedido.entity';
 import { StatusPedido } from 'src/enum/statuspedido.enum';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
+import { PostProdutoInputDto } from 'src/produto/services/postProduto/dto/postProdutosInputDto';
+import { PostPedidoInputDto } from '../dto/postPedidoInputDto';
+import { ItemPedidoEntity } from 'src/pedidos/entity/itemPedido.entity';
+import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 
 @Injectable()
 export class PedidoService {
@@ -16,12 +20,10 @@ export class PedidoService {
         private readonly pedidoRepository: Repository<PedidosEntity>,
         @InjectRepository(UsuarioEntity)
         private readonly usuarioRepository: Repository<UsuarioEntity>,
-    ) {} //private readonly pedidosRepository: PedidoRepository) {}
-    //usuario vai ser buscado na primeira query e
-    // logo apos vc vai atribuar a const para o data.usuaario,
-    // para dessa forma conseguir criar o pedido e o usuario estar relacionado ao pedido
-
-    async execute(usuario_id: string) {
+        @InjectRepository(ProdutoEntity)
+        private readonly produtoRepository: Repository<ProdutoEntity>,
+    ) {}
+    async execute(usuario_id: string, data: PostPedidoInputDto) {
         try {
             const usuarios = await this.usuarioRepository.findOneBy({
                 id: usuario_id,
@@ -30,11 +32,42 @@ export class PedidoService {
             if (!usuarios) {
                 throw new NotFoundException('Usuário não encontrado');
             }
+            const produtosId = data.itens_pedido.map(
+                (itemPedido) => itemPedido.produtoId,
+            );
             const pedidoEntity = new PedidosEntity();
 
-            pedidoEntity.valor_total = '0';
-            pedidoEntity.status = StatusPedido.EM_PROCESSAMENTO;
-            pedidoEntity.usuario = usuarios;
+            const produtosRelacionados = await this.produtoRepository.findBy({
+                id: In(produtosId),
+            });
+
+            const itensPedido = data.itens_pedido.map((itemPedido) => {
+                const produtoRelacionado = produtosRelacionados.find(
+                    (produto) => produto.id === itemPedido.produtoId,
+                );
+
+                if (!produtoRelacionado) {
+                    throw new NotFoundException('O Produto não foi encontrado');
+                }
+
+                pedidoEntity.status = StatusPedido.EM_PROCESSAMENTO;
+                pedidoEntity.usuario = usuarios;
+
+                const itemPedidoEntity = new ItemPedidoEntity();
+                itemPedidoEntity.produto = produtoRelacionado;
+                itemPedidoEntity.preco_venda = produtoRelacionado?.valor;
+                itemPedidoEntity.quantidade = itemPedido.quantidade;
+
+                itemPedidoEntity.produto!.quantidade -= itemPedido.quantidade;
+                return itemPedidoEntity;
+            });
+
+            const valorTotal = itensPedido.reduce((total, item) => {
+                return total + item.preco_venda! * item.quantidade;
+            }, 0);
+
+            pedidoEntity.itemPedido = itensPedido;
+            pedidoEntity.valor_total = valorTotal;
 
             return await this.pedidoRepository.save(pedidoEntity);
         } catch (error) {

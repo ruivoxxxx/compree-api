@@ -6,6 +6,7 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { PedidosEntity } from './pedido.entity';
+import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 
 @Entity({ name: 'pedidos' })
 export class ItemPedidoEntity {
@@ -16,12 +17,17 @@ export class ItemPedidoEntity {
     quantidade: number;
 
     @Column({ name: 'preco_venda', nullable: false })
-    preco_venda: number;
+    preco_venda?: number;
 
     @OneToMany(() => PedidosEntity, (pedido) => pedido.itemPedido, {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     })
     pedido: PedidosEntity;
+
+    @ManyToOne(() => ProdutoEntity, (produto) => produto.itemPedido, {
+        cascade: ['update'],
+    })
+    produto?: ProdutoEntity;
 }
 
