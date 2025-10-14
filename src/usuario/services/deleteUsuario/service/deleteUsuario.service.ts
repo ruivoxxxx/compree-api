@@ -14,7 +14,7 @@ export class DeleteUsuarioService {
         try {
             const usuario = await this.deleteUsuarioRepository.buscaUsuario(id);
             if (!usuario) {
-                throw new NotFoundException('Usuário Não Encontrado');
+                throw new NotFoundException('Usuário não encontrado');
             }
 
             return await this.deleteUsuarioRepository.deletaUsuario(id);

@@ -15,7 +15,7 @@ export class PostProdutoService {
             const result =
                 await this.postProdutoRepository.verificaProduto(data);
             if (result) {
-                throw new BadRequestException('Produto Já Existe');
+                throw new BadRequestException('Produto já existe');
             }
             await this.postProdutoRepository.criaProduto(data);
         } catch (error) {

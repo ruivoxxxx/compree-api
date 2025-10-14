@@ -13,7 +13,7 @@ export class PutProdutoRepository {
     async buscaProduto(id: string) {
         return await this.dataBaseService.findOne({
             select: ['id'],
-            where: { deleted_at: IsNull() },
+            where: { id: id, deleted_at: IsNull() },
         });
     }
 

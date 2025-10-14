@@ -10,6 +10,7 @@ import {
 
 import {
     ApiInternalServerErrorResponse,
+    ApiNotFoundResponse,
     ApiOkResponse,
     ApiOperation,
 } from '@nestjs/swagger';
@@ -35,31 +36,32 @@ export class UsuarioController {
     @Post('')
     @ApiOperation({ summary: 'Criação de usuário' })
     @ApiOkResponse({ description: 'Usuário criado com sucesso' })
-    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados' })
     async createUsuario(@Body() data: PostUsuarioInputDto) {
         await this.postUsuarioService.execute(data);
     }
 
     @Get('')
     @ApiOperation({ summary: 'Lista os usuários existentes' })
-    @ApiOkResponse({ description: 'Usuários Listados Com Sucesso!' })
-    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
+    @ApiOkResponse({ description: 'Usuários listados com sucesso!' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados' })
     async listUsuario(): Promise<GetUsuarioOutputDto[]> {
         return await this.getUsuarioService.execute();
     }
 
     @Get('/:id')
     @ApiOperation({ summary: 'Lista os usuários existentes' })
-    @ApiOkResponse({ description: 'Usuários Listados Com Sucesso!' })
-    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
+    @ApiOkResponse({ description: 'Usuário listado com sucesso!' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados' })
     async listUsuarioById(@Param('id') id: string) {
         return await this.getUsuarioByIdService.execute(id);
     }
 
     @Put('/:id')
-    @ApiOperation({ summary: 'Atualiza informações de Usuário' })
-    @ApiOkResponse({ description: 'Usuário Atualizado Com Sucesso!' })
-    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
+    @ApiOperation({ summary: 'Atualiza informações de Usuário.' })
+    @ApiOkResponse({ description: 'Usuário atualizado com sucesso!' })
+    @ApiNotFoundResponse({ description: 'Usuário não encontrado.' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados.' })
     async putUsuario(
         @Param('id') id: string,
         @Body() data: PutUsuarioInputDto,
@@ -69,8 +71,9 @@ export class UsuarioController {
 
     @Delete('/:id')
     @ApiOperation({ summary: 'Deleta informações de Usuário' })
-    @ApiOkResponse({ description: 'Usuário Deletado Com Sucesso!' })
-    @ApiInternalServerErrorResponse({ description: 'Erro no Banco de Dados' })
+    @ApiOkResponse({ description: 'Usuário deletado com sucesso!' })
+    @ApiNotFoundResponse({ description: 'Usuário não encontrado' })
+    @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados' })
     async deleteUsuario(@Param('id') id: string) {
         await this.deleteUsuarioService.execute(id);
     }

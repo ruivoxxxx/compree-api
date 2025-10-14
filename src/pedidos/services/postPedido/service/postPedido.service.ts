@@ -7,7 +7,7 @@ import { PedidosEntity } from 'src/pedidos/entity/pedido.entity';
 import { StatusPedido } from 'src/enum/statuspedido.enum';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
-import { In, Repository } from 'typeorm';
+import { In, IsNull, Repository } from 'typeorm';
 import { PostProdutoInputDto } from 'src/produto/services/postProduto/dto/postProdutosInputDto';
 import { PostPedidoInputDto } from '../dto/postPedidoInputDto';
 import { ItemPedidoEntity } from 'src/pedidos/entity/itemPedido.entity';
@@ -25,8 +25,9 @@ export class PedidoService {
     ) {}
     async execute(usuario_id: string, data: PostPedidoInputDto) {
         try {
-            const usuarios = await this.usuarioRepository.findOneBy({
-                id: usuario_id,
+            const usuarios = await this.usuarioRepository.findOne({
+                select: ['id'],
+                where: { id: usuario_id, deleted_at: IsNull() },
             });
 
             if (!usuarios) {

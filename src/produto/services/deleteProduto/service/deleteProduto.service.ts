@@ -15,7 +15,7 @@ export class DeleteProdutoService {
         try {
             const produto = await this.deleteProdutoRepository.buscaProduto(id);
             if (!produto) {
-                throw new NotFoundException('Produto Não Encontrado');
+                throw new NotFoundException('Produto não encontrado');
             }
             await this.deleteProdutoRepository.deletaProduto(id);
         } catch (error) {
