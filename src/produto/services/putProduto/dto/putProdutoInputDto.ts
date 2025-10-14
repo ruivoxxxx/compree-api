@@ -16,14 +16,14 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PutProdutoInputDto {
-    @ApiProperty()
-    @IsNotEmpty({ message: 'Id do produto não pode ser vazio' })
-    @IsString()
-    id: string;
+    // @ApiProperty()
+    // @IsNotEmpty({ message: 'Id do produto não pode ser vazio' })
+    // @IsString()
+    // id: string;
 
-    @ApiProperty()
-    @IsOptional()
-    id_usuario: number;
+    // @ApiProperty()
+    // @IsOptional()
+    // id_usuario: number;
 
     @ApiProperty()
     @IsString()
@@ -39,7 +39,7 @@ export class PutProdutoInputDto {
     @IsNumber()
     @Min(0)
     @IsOptional()
-    quantidadeDisponivel: number;
+    quantidade_disponivel: number;
 
     @ApiProperty()
     @IsString()

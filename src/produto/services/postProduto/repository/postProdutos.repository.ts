@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
-import { IsNull, Repository } from 'typeorm';
+import { ILike, IsNull, Repository } from 'typeorm';
 import { PostProdutoInputDto } from '../dto/postProdutosInputDto';
 import { Injectable } from '@nestjs/common';
 @Injectable()
@@ -13,7 +13,7 @@ export class PostProdutoRepository {
     async verificaProduto(data: PostProdutoInputDto) {
         return await this.dataBaseService.findOne({
             select: ['nome'],
-            where: { nome: data.nome, deleted_at: IsNull() },
+            where: { nome: ILike(data.nome_produto), deleted_at: IsNull() },
         });
     }
 
@@ -24,12 +24,12 @@ export class PostProdutoRepository {
             .into(ProdutoEntity)
             .values({
                 nome: () => 'UPPER(:nome)',
-                valor: data.valor,
+                valor: data.valor_produto,
                 quantidade: data.quantidade,
                 descricao: data.descricao,
                 categoria: data.categoria,
             })
-            .setParameters({ nome: data.nome })
+            .setParameters({ nome: data.nome_produto })
             .execute();
     }
 }

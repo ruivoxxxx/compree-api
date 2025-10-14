@@ -6,7 +6,7 @@ import { GetUsuarioService } from './getUsuario/service/getUsuario.service';
 import { PostUsuarioService } from './postUsuario/service/postUsuario.service';
 import { PutUsuarioService } from './putUsuario/service/putUsuario.service';
 import { DeleteUsuarioService } from './deleteUsuario/service/deleteUsuario.service';
-import { PostUsuarioRepository } from './postUsuario/repository/postUsuarioRepository';
+import { PostUsuarioRepository } from './postUsuario/repository/postUsuario.repository';
 import { GetUsuarioByIdService } from './getUsuarioById/service/getUsuarioById.service';
 import { GetUsuarioByIdRepository } from './getUsuarioById/repository/getUsuarioById.repository';
 import { GetUsuarioRepository } from './getUsuario/repository/getUsuario.repository';

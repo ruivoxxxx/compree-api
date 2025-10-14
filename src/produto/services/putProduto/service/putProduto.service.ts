@@ -13,9 +13,8 @@ export class PutProdutoService {
         try {
             const produto = await this.putProdutoRepository.buscaProduto(id);
             if (!produto) {
-                throw new NotFoundException('Produto não Encontrado');
+                throw new NotFoundException('Produto não encontrado');
             }
-            console.log(data);
             await this.putProdutoRepository.atualizaProduto(data);
         } catch (error) {
             if (error instanceof NotFoundException) throw error;

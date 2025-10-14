@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { PostUsuarioInputDto } from '../dto/postUsuarioInputDto';
-import { PostUsuarioRepository } from '../repository/postUsuarioRepository';
+import { PostUsuarioRepository } from '../repository/postUsuario.repository';
 @Injectable()
 export class PostUsuarioService {
     constructor(

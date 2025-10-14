@@ -42,40 +42,40 @@ export class ImagemProdutoDTO {
     produto: ProdutoEntity;
 }
 export class PostProdutoInputDto {
-    @ApiProperty()
-    @IsOptional()
-    id: string;
+    // @ApiProperty()
+    // @IsOptional()
+    // id: string;
 
-    @ApiProperty()
-    @IsNotEmpty({ message: 'Id de Usuário não pode ser vazio' })
-    @IsNumber()
-    id_usuario: string;
+    // @ApiProperty()
+    // @IsNotEmpty({ message: 'Id de Usuário não pode ser vazio' })
+    // @IsNumber()
+    // id_usuario: string;
 
     @ApiProperty()
     @IsNotEmpty({ message: 'Nome do Produto não pode ser vazio' })
     @IsString()
-    nome: string;
+    nome_produto: string;
 
-    @ApiProperty({})
+    @ApiProperty()
     @IsNumber()
     @IsNotEmpty({ message: 'Valor do Produto não pode ser vazio' })
     @Min(1)
-    valor: number;
+    valor_produto: number;
 
     @ApiProperty()
-    @IsNumber()
     @IsNotEmpty({ message: 'Quantidade do Produto não pode ser vazio' })
     @Min(1, { message: 'O valor precisa ser maior que 0' })
+    @IsNumber()
     quantidade: number;
 
     @ApiProperty()
-    @IsString()
     @IsOptional()
+    @IsString()
     descricao: string;
 
     @ApiProperty()
-    @IsString()
     @IsNotEmpty({ message: 'Categoria do Produto não pode ser vazio' })
+    @IsString()
     categoria: string;
 
     // @ApiProperty()

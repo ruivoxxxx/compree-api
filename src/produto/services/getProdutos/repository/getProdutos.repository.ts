@@ -12,9 +12,11 @@ export class GetProdutosRepository {
     ) {}
 
     async getProdutos(): Promise<GetProdutosOutPutDto[]> {
-        return await this.dataBaseService.find({
+        const result = await this.dataBaseService.find({
             select: ['id', 'nome', 'valor', 'categoria', 'descricao'],
             where: { deleted_at: IsNull() },
         });
+
+        return result ?? [];
     }
 }
