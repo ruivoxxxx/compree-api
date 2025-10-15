@@ -16,10 +16,10 @@ export class PostUsuarioRepository {
             .into(UsuarioEntity)
             .values({
                 nome: () => 'UPPER(:nome)',
-                email: data.email,
+                email: () => 'UPPER (:email)',
                 senha: data.senha,
             })
-            .setParameters({ nome: data.nome })
+            .setParameters({ nome: data.nome, email: data.email })
             .execute();
     }
 }

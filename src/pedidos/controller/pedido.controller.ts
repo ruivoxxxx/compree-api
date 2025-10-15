@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { PedidoService } from '../services/postPedido/service/postPedido.service';
+import { PostPedidoService } from '../services/postPedido/service/postPedido.service';
 import {
     ApiInternalServerErrorResponse,
     ApiNotFoundResponse,
@@ -13,7 +13,7 @@ import { PostPedidoInputDto } from '../services/postPedido/dto/postPedidoInputDt
 @Controller('pedidos')
 export class PedidoController {
     constructor(
-        private readonly pedidoService: PedidoService,
+        private readonly pedidoService: PostPedidoService,
         private readonly getPedidoService: GetPedidoService,
     ) {}
 

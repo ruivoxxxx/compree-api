@@ -14,7 +14,7 @@ import { ItemPedidoEntity } from 'src/pedidos/entity/itemPedido.entity';
 import { ProdutoEntity } from 'src/produto/entity/produto.entity';
 
 @Injectable()
-export class PedidoService {
+export class PostPedidoService {
     constructor(
         @InjectRepository(PedidosEntity)
         private readonly pedidoRepository: Repository<PedidosEntity>,

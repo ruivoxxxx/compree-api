@@ -12,6 +12,9 @@ export class UsuarioEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @Column({ name: 'nome_usuario', length: 100, nullable: false })
+    nome_usuario: string;
+
     @Column({ name: 'nome', length: 255, nullable: true })
     nome: string;
 

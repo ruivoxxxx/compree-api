@@ -30,6 +30,7 @@ export class PostgresConfigService implements TypeOrmOptionsFactory {
                 ItemPedidoEntity,
             ],
             synchronize: false,
+            logging: true,
         };
     }
 }
