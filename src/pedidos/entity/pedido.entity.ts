@@ -14,7 +14,7 @@ export class PedidosEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'valor_total', length: 255, nullable: true })
+    @Column({ name: 'valor_total', nullable: true })
     valor_total: number;
 
     @Column({ name: 'status', enum: StatusPedido, nullable: true })

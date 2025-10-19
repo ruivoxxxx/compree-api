@@ -7,6 +7,7 @@ import {
     Post,
     Put,
     Query,
+    UseInterceptors,
 } from '@nestjs/common';
 
 import {
@@ -24,6 +25,7 @@ import { GetProdutoByIdService } from '../services/getProdutoById/service/getPro
 import { DeleteProdutoService } from '../services/deleteProduto/service/deleteProduto.service';
 import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
 import { GetProdutosOutPutDto } from '../services/getProdutos/dto/getProdutosOutPut.dto';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 
 @Controller('produto')
 export class ProdutoController {
@@ -46,6 +48,7 @@ export class ProdutoController {
     }
 
     @Get('/:id')
+    @UseInterceptors(CacheInterceptor)
     @ApiOperation({ summary: 'Lista Produto por id' })
     @ApiOkResponse({
         description: 'Produto listado com sucesso!',
@@ -53,6 +56,7 @@ export class ProdutoController {
     @ApiNotFoundResponse({ description: 'Produto não encontrado' })
     @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados' })
     async listByIdProduto(@Param('id') id: string) {
+        console.log('BUSCANDO NO BANCO');
         return await this.getProdutosByIdService.execute(id);
     }
 

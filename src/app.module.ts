@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { ConfigModule } from '@nestjs/config';
-import { ProdutoController } from './produto/controller/produto.controller';
 import { ProdutoModule } from './produto/produto.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { PedidosModule } from './pedidos/pedidos.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { redisStore } from 'cache-manager-redis-yet';
 
 @Module({
     imports: [
@@ -19,6 +20,18 @@ import { PedidosModule } from './pedidos/pedidos.module';
         ProdutoModule,
         UsuarioModule,
         PedidosModule,
+        CacheModule.registerAsync({
+            useFactory: async () => ({
+                store: await redisStore({
+                    socket: {
+                        host: '127.0.0.1',
+                        port: 6379,
+                    },
+                    ttl: 3600 * 1000,
+                }),
+            }),
+            isGlobal: true,
+        }),
     ],
     controllers: [],
     providers: [],
