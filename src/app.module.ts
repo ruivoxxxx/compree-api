@@ -6,6 +6,7 @@ import { ProdutoController } from './produto/controller/produto.controller';
 import { ProdutoModule } from './produto/produto.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { PedidosModule } from './pedidos/pedidos.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { PedidosModule } from './pedidos/pedidos.module';
         ProdutoModule,
         UsuarioModule,
         PedidosModule,
+        AuthModule,
     ],
     controllers: [],
     providers: [],
