@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostUsuarioInputDto } from '../dto/postUsuarioInputDto';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { UsuarioEntity } from 'src/usuario/entity/usuario.entity';
 import { Injectable } from '@nestjs/common';
 @Injectable()
@@ -9,6 +9,12 @@ export class PostUsuarioRepository {
         @InjectRepository(UsuarioEntity)
         private readonly dataBaseService: Repository<UsuarioEntity>,
     ) {}
+
+    async searchEmail(email: string) {
+        return await this.dataBaseService.findOne({
+            where: { email: email, deleted_at: IsNull() },
+        });
+    }
     async createUsuario(data: PostUsuarioInputDto) {
         await this.dataBaseService
             .createQueryBuilder()
