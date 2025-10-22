@@ -8,8 +8,8 @@ import { Request } from 'express';
 @Injectable()
 export class JwtGuards implements CanActivate {
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        const requisicao = context.switchToHttp().getRequest();
-        const token = this.headerToken(requisicao);
+        const request = context.switchToHttp().getRequest();
+        const token = this.headerToken(request);
         if (!token) {
             throw new UnauthorizedException();
         }
