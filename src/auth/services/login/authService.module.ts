@@ -11,7 +11,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
         TypeOrmModule.forFeature([UsuarioEntity]),
         JwtModule.register({
             global: true,
-            secret: 'SEGREDO_SEGREDO',
+            secret: process.env.JWT_SECRET,
             signOptions: { expiresIn: '72h' },
         }),
     ],
@@ -19,4 +19,3 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
     providers: [AuthService, PostUsuarioRepository],
 })
 export class AuthModuleService {}
-
