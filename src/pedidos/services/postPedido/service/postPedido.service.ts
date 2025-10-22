@@ -29,6 +29,7 @@ export class PostPedidoService {
                 select: ['id'],
                 where: { id: usuario_id, deleted_at: IsNull() },
             });
+            console.log(usuarios);
 
             if (!usuarios) {
                 throw new NotFoundException('Usuário não encontrado');

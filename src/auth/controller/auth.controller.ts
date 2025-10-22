@@ -7,7 +7,7 @@ export class AuthController {
 
     @Post('login')
     async login(@Body() data: LoginInputDto) {
+        console.log(data);
         return await this.authService.execute(data);
     }
 }
-

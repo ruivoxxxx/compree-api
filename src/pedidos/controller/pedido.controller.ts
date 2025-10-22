@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { PostPedidoService } from '../services/postPedido/service/postPedido.service';
 import {
     ApiInternalServerErrorResponse,
@@ -9,6 +9,7 @@ import {
 import { GetPedidoService } from '../services/getPedido/service/getPedido.service';
 import { GetPedidoInputDto } from '../services/getPedido/dto/getPedidoInputDto';
 import { PostPedidoInputDto } from '../services/postPedido/dto/postPedidoInputDto';
+import { JwtGuards } from 'src/auth/guards/auth.guard';
 
 @Controller('pedidos')
 export class PedidoController {
@@ -18,6 +19,7 @@ export class PedidoController {
     ) {}
 
     @Post('')
+    @UseGuards(JwtGuards)
     @ApiOperation({ summary: 'Criação de Pedido' })
     @ApiOkResponse({ description: 'Pedido criado com sucesso!' })
     @ApiNotFoundResponse({
@@ -32,6 +34,7 @@ export class PedidoController {
     }
 
     @Get('')
+    @UseGuards(JwtGuards)
     @ApiOperation({ summary: 'Busca de pedido por Id' })
     @ApiOkResponse({ description: 'Pedido encontrado com sucesso!' })
     @ApiInternalServerErrorResponse({ description: 'Erro no banco de dados' })

@@ -7,6 +7,7 @@ import {
     Post,
     Put,
     Query,
+    UseGuards,
 } from '@nestjs/common';
 
 import {
@@ -24,6 +25,7 @@ import { GetProdutoByIdService } from '../services/getProdutoById/service/getPro
 import { DeleteProdutoService } from '../services/deleteProduto/service/deleteProduto.service';
 import { GetProdutosService } from '../services/getProdutos/service/getProdutos.service';
 import { GetProdutosOutPutDto } from '../services/getProdutos/dto/getProdutosOutPut.dto';
+import { JwtGuards } from 'src/auth/guards/auth.guard';
 
 @Controller('produto')
 export class ProdutoController {
@@ -36,6 +38,7 @@ export class ProdutoController {
     ) {}
 
     @Get()
+    @UseGuards(JwtGuards)
     @ApiOperation({ summary: 'Lista Produtos' })
     @ApiOkResponse({
         description: 'Produtos listados com sucesso!',
